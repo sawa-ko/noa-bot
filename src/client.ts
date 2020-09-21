@@ -6,15 +6,25 @@ import {
   ArgsOf,
   Client,
 } from '@typeit/discord';
-import * as Path from 'path';
+import { join } from 'path';
 
-@Discord('!', {
-  import: [Path.join(__dirname, '..', 'commands', '*.ts')],
+@Discord('noa ', {
+  import: [
+    join(__dirname, 'commands', '*.ts'),
+    join(__dirname, 'commands', '*.js'),
+  ],
 })
 export class DiscordApp {
   @On('message')
   onMessage([message]: ArgsOf<'message'>, client: Client) {
-    console.log(message);
+    // console.log(message);
+  }
+
+  @On('ready')
+  async onReady(args, bot) {
+    bot.user.setActivity(
+      'noa ayuda | Con este comando puedes ver lo que puedo hacer (￣▽￣)ノ',
+    );
   }
 
   @CommandNotFound()

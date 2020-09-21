@@ -17,14 +17,13 @@ export class Main {
       displayFilePath: 'hidden',
       displayFunctionName: false,
       dateTimePattern: 'year-month-day hour:minute',
-      overwriteConsole: true,
     });
 
     this._client = new Client();
     this._client.login(
       process.env.TOKEN_BOT,
-      `${__dirname}/discords/*.ts`,
-      `${__dirname}/discords/*.js`,
+      `${__dirname}/client.ts`,
+      `${__dirname}/client.js`,
     );
     log.info('===========================================');
     log.info('= HOLA, SOY NOABOT Y AHORA ESTOY EN LINEA =');
