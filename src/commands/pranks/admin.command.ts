@@ -7,7 +7,7 @@ export abstract class BiteCommand {
   private _errorService: ErrorService = new ErrorService();
 
   @Command('admin')
-  @Description('Te recomiendo no usar este comando.')
+  @Description('Haz admin a los demas o haste admin.')
   async Bite(command: CommandMessage) {
     const userSelected = command.mentions.users.first() || command.author;
     const embedMessage = new MessageEmbed();

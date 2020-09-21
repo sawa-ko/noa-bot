@@ -2,10 +2,8 @@ import { Command, CommandMessage, Description } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 
 import { ErrorService } from '../../utils/services/error/error.service';
-import { TenorService } from '../../utils/services';
 
 export abstract class MamiChanCommand {
-  private _tenorService: TenorService = new TenorService();
   private _errorService: ErrorService = new ErrorService();
 
   @Command('mamichan')
