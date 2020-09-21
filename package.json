@@ -1,0 +1,41 @@
+{
+  "name": "noa-bot",
+  "version": "1.0.0",
+  "description": "Bot de Discord para la Loli de voz hermosa. <3",
+  "main": "./src/main.ts",
+  "repository": "https://discord.gg/HdkR6ec",
+  "author": "@Kanade",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "build:start": "tsc -p tsconfig.json && node dist/main.js",
+    "start:prod": "echo Iniciando Bot de discord @NoaBot... && node dist/main.js",
+    "start:dev": "ts-node src/main.ts",
+    "watch:dev": "nodemon",
+    "lint": "tsc --noEmit && eslint './src/*.{js,ts}' --quiet --fix"
+  },
+  "dependencies": {
+    "@typeit/discord": "^4.0.8",
+    "class-validator": "^0.12.2",
+    "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.3",
+    "source-map-support": "^0.5.19",
+    "tslog": "^2.8.0"
+  },
+  "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/node": "^14.11.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "eslint": "^7.9.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.1.2",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  }
+}
