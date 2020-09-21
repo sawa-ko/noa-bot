@@ -8,22 +8,22 @@ import {
 } from '../../utils/enums';
 import { TenorService, ErrorService } from '../../utils/services';
 
-export abstract class AngryCommand {
+export abstract class BiteCommand {
   private _tenorService: TenorService = new TenorService();
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('baka')
-  @Description('Dile Baka a otro usuario porque se lo merece.')
-  async Baka(command: CommandMessage) {
+  @Command('bite')
+  @Description('Muerde a otro usuario y o deja que yo te muerda WAHAHA.')
+  async Bite(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
     const embedMessage = new MessageEmbed();
-    const bakaAnime = (await this._tenorService.getRandom('Anime Baka')).body
+    const biteAnime = (await this._tenorService.getRandom('Anime Bite')).body
       .results[0].media[0].gif.url;
 
     if (!userSelected) {
       return command.reply(
         this._errorService.showError(
-          'Lo siento Onii-Chan, pero tienes que decirle Baka a alguien, no a un fastasma. ◑.◑',
+          'Lo siento Onii-Chan, si te muerdes solo vas a llorar jeje.',
         ),
       );
     }
@@ -31,33 +31,36 @@ export abstract class AngryCommand {
     switch (userSelected.username) {
       case ConfigurationBotEnum.NAME_BOT:
         embedMessage.setColor(EmbedColorsEnum.RED);
-        embedMessage.setTitle('Jeje, no te dejare decirme eso ＼(｀0´)／');
-        embedMessage.setDescription(
-          'Como te atreves a retarme, no te lo perdonare, ¡¡Nunca!!',
+        embedMessage.setTitle(
+          `Uy, ${command.author.username} me ha mordido (ﾉ~o~)ﾉ`,
         );
-        embedMessage.setFooter('Comando imperdodable');
+        embedMessage.setDescription('Esto se va a poner feo...');
+        embedMessage.setImage(biteAnime);
+        embedMessage.setFooter('Me siento extraña, ¿Me convertire en Zombie?');
+        embedMessage.setColor(
+          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
+        );
 
         command.channel.send(embedMessage);
         break;
       case command.author.username:
         command.reply(
           this._errorService.showError(
-            'Lo siento Onii-Chan, pero no puedes decirte Baka a ti mismo. ◑.◑',
+            'Lo siento Onii-Chan, pero no puedes morderte a ti mismo. >.<',
           ),
         );
         break;
       default:
         embedMessage.setTitle(
-          `¡OMG! ${command.author.username} le ha dicho Baka a ${userSelected.username}`,
+          `Cuidado todos, ${command.author.username} se ha puesto en modo raro y ha mordido a ${userSelected.username}`,
         );
         embedMessage.setColor(
           EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
         );
         embedMessage.setDescription(
-          'Algo totalmente epico, creo que los baneare ahora jeje. (̂ ˃̥̥̥ ˑ̫ ˂̥̥̥ )̂',
+          'Les recomiendo usar su filtro anti-raro para evitar ser mordidos. \n( ⚆ _ ⚆ )',
         );
-        embedMessage.setImage(bakaAnime);
-        embedMessage.setFooter('Returbio esto amigo');
+        embedMessage.setImage(biteAnime);
 
         command.channel.send(embedMessage);
         break;
