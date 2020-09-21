@@ -10,8 +10,8 @@ import { join } from 'path';
 
 @Discord('noa ', {
   import: [
-    join(__dirname, 'commands', '*.ts'),
-    join(__dirname, 'commands', '*.js'),
+    join(__dirname, 'commands/**', '*.ts'),
+    join(__dirname, 'commands/**', '*.js'),
   ],
 })
 export class DiscordApp {

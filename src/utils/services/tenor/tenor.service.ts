@@ -2,12 +2,12 @@ import { httpClient, IHttpClientOptions } from 'http-client-retry';
 
 import '../../env/configuration';
 
-export class GiphyService {
-  private apiGiphy = 'https://api.giphy.com/v1/gifs';
+export class TenorService {
+  private apiTenor = 'https://api.tenor.com/v1';
 
-  public async getRandom() {
+  public async getRandom(name: string) {
     const httpClientOptions: IHttpClientOptions = {
-      uri: `${this.apiGiphy}/random?api_key=${process.env.GIPHY_KEY}&limit=1`,
+      uri: `${this.apiTenor}/random?q=${name}&key=${process.env.TENOR_KEY}&limit=1`,
       method: 'GET',
       automaticallyParseJson: true,
     };
@@ -17,7 +17,7 @@ export class GiphyService {
 
   public async getAnimeGifByName(name: string) {
     const httpClientOptions: IHttpClientOptions = {
-      uri: `${this.apiGiphy}/search?api_key=${process.env.GIPHY_KEY}&q=${name}&limit=1`,
+      uri: `${this.apiTenor}/search?q=${name}&key=${process.env.TENOR_KEY}&limit=1`,
       method: 'GET',
       automaticallyParseJson: true,
     };
