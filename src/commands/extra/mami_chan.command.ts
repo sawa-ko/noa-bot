@@ -11,16 +11,15 @@ export abstract class MamiChanCommand {
   @Command('mamichan')
   @Description('Muestra una imagen random de la hermosa Mami Chan.')
   async MamiChan(command: CommandMessage) {
-    const response = (
-      await this._tenorService.getAnimeGifByName('Kanojo, Okarishimasu')
-    ).body.results[0].media[0].gif.url;
+    const MamiChan =
+      'https://media1.tenor.com/images/4cffbddb093cc1138143268129fc61f3/tenor.gif?itemid=18518348';
 
     const embedMessage = new MessageEmbed();
-    embedMessage.setTitle('Solo observa que hermosa es Mami Chan');
+    embedMessage.setTitle('Solo observa que hermosa es Mami Chan 7u7');
     embedMessage.setDescription(
       'Observa esta belleza conmigo pequeña personita, solo observa esta maravilla malefica. OwO',
     );
-    embedMessage.setImage(response);
+    embedMessage.setImage(MamiChan);
     embedMessage.setFooter('Pero que chinge a su madre...');
 
     try {

@@ -12,7 +12,7 @@
     "build:start": "tsc -p tsconfig.json && node dist/main.js",
     "start:prod": "echo Iniciando Bot de discord @NoaBot... && node dist/main.js",
     "start:dev": "ts-node src/main.ts",
-    "watch:dev": "nodemon",
+    "watch:dev": "cls && nodemon",
     "lint": "tsc --noEmit && eslint './src/*.{js,ts}' --quiet --fix"
   },
   "dependencies": {

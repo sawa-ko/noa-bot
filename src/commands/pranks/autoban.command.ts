@@ -9,7 +9,7 @@ export abstract class BiteCommand {
 
   @Command('autoban')
   @Description('Te recomiendo no usar este comando.')
-  async Bite(command: CommandMessage) {
+  async AutoBan(command: CommandMessage) {
     const userSelected = command.mentions.users.first() || command.author;
     const embedMessage = new MessageEmbed();
     const bakaAnime = (await this._tenorService.getRandom('Anime Sad')).body
