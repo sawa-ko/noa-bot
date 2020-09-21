@@ -1,5 +1,6 @@
 import { MessageEmbed } from 'discord.js';
-import { EmbedColorsEnum } from 'src/utils/enums/embed.colors.enum';
+
+import { EmbedColorsEnum } from '../../../utils/enums';
 
 export class ErrorService {
   public showError(description: string) {

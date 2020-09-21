@@ -2,6 +2,7 @@ import { Command, Description, CommandMessage } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 
 import { TenorService, ErrorService } from '../../utils/services';
+import { ConfigurationBotEnum } from '../../utils/enums';
 
 export abstract class AngryCommand {
   private _tenorService: TenorService = new TenorService();
@@ -19,7 +20,7 @@ export abstract class AngryCommand {
 
     if (userSelected) {
       switch (userSelected.username) {
-        case 'NoaBot':
+        case ConfigurationBotEnum.NAME_BOT:
           embedMessage.setTitle(
             `¡No puedes enojarte conmigo ${command.author.username} WAHAHA!`,
           );
