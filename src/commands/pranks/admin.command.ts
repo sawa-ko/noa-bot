@@ -39,14 +39,6 @@ export abstract class BiteCommand {
         );
       }
 
-      if (!command.member.hasPermission('MANAGE_NICKNAMES')) {
-        return command.channel.send(
-          this._errorService.showError(
-            'Oh no, no he podido ejecutar este comando porque no tengo los permisos suficientes, necesito el siguiente permiso. \nPERMISO:\n **MANAGE_NICKNAMES**',
-          ),
-        );
-      }
-
       command.member.setNickname(`[ADMIN] ${command.author.username}`);
 
       try {
