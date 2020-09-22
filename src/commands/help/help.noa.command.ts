@@ -14,6 +14,7 @@ export abstract class HelpNoa {
     let descriptionHelp = '';
     descriptionHelp += 'Bien, esto puedo hacer por ti.\n';
     descriptionHelp += '\n';
+
     descriptionHelp += '🤜 **noa say [mensaje - obligatorio]**\n';
     descriptionHelp += '=> Dire algo que quieras por ti.\n';
     descriptionHelp += '\n';

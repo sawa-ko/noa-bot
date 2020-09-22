@@ -40,6 +40,14 @@ export abstract class Help {
     descriptionHelp += '=> No uses estos comandos, por favor.\n';
     descriptionHelp += '\n';
 
+    descriptionHelp += '💖 **noa h social**\n';
+    descriptionHelp += '=> ¡Sígueme en mis redes sociales!\n';
+    descriptionHelp += '\n';
+
+    descriptionHelp += '🔵 **Facebook**\n';
+    descriptionHelp += 'https://www.facebook.com/noachanvt\n';
+    descriptionHelp += '\n';
+
     embedMessage.setThumbnail(
       'https://i.ibb.co/HGpm6Rh/118884326-101951864986516-1661613338635869054-n.jpg',
     );

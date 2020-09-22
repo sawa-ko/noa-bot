@@ -4,25 +4,23 @@ import { MessageEmbed } from 'discord.js';
 import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class HelpWarning {
+export abstract class HelpSocial {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('h warning')
+  @Command('h social')
   @Description('Coamandos de bromas para los usuarios.')
-  async HelpWarning(command: CommandMessage) {
+  async HelpSocial(command: CommandMessage) {
     const embedMessage = new MessageEmbed();
     let descriptionHelp = '';
-    descriptionHelp += '¡ALERTA! ¡Comandos peligrosos!\n';
+    descriptionHelp +=
+      'Si quieres ser mi fiel seguidor, ¡Te invito a que me sigas en mis redes sociales!\n';
     descriptionHelp += '\n';
-    descriptionHelp += '🤜 **noa autoban**\n';
-    descriptionHelp += '=> Adios amiguito.\n';
-    descriptionHelp += '\n';
-    descriptionHelp += '🤜 **noa autoban [usuario - opcional]**\n';
-    descriptionHelp += '=> Dile adios a tu amiguito.\n';
+    descriptionHelp += '🔵 **Facebook**\n';
+    descriptionHelp += 'https://www.facebook.com/noachanvt\n';
     descriptionHelp += '\n';
 
     embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
-    embedMessage.setTitle('Comandos Extras');
+    embedMessage.setTitle('Mis redes sociales');
     embedMessage.setDescription(descriptionHelp);
     embedMessage.setFooter(
       'Si aun tienes problemas, contacta a mi creador @kaname#0001',

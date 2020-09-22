@@ -14,6 +14,7 @@ export abstract class HelpLoli {
     let descriptionHelp = '';
     descriptionHelp += 'Solo dire una cosa... ¡Lolis gratis para todos!\n';
     descriptionHelp += '\n';
+
     descriptionHelp += '🤜 **noa loli**\n';
     descriptionHelp += '=> Recibe una Loli que te quiere mucho. <3\n';
     descriptionHelp += '\n';

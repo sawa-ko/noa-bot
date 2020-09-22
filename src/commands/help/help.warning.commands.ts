@@ -4,20 +4,23 @@ import { MessageEmbed } from 'discord.js';
 import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class HelpExtra {
+export abstract class HelpWarning {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('h extra')
-  @Description('Comandos extras personalizados que puedo hacer.')
-  async HelpExtra(command: CommandMessage) {
+  @Command('h warning')
+  @Description('Coamandos de bromas para los usuarios.')
+  async HelpWarning(command: CommandMessage) {
     const embedMessage = new MessageEmbed();
     let descriptionHelp = '';
-    descriptionHelp +=
-      'Cuidado, estos comandos no son oficiales, son por peticiones. OwO\n';
+    descriptionHelp += '¡ALERTA! ¡Comandos peligrosos!\n';
     descriptionHelp += '\n';
-    descriptionHelp += '🤜 **noa mamichan**\n';
 
-    descriptionHelp += '=> Observar a la grandiosa Mami Chan.\n';
+    descriptionHelp += '🤜 **noa autoban**\n';
+    descriptionHelp += '=> Adios amiguito.\n';
+    descriptionHelp += '\n';
+
+    descriptionHelp += '🤜 **noa autoban [usuario - opcional]**\n';
+    descriptionHelp += '=> Dile adios a tu amiguito.\n';
     descriptionHelp += '\n';
 
     embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
