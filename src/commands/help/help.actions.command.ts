@@ -4,14 +4,14 @@ import { MessageEmbed } from 'discord.js';
 import { EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class MamiChanCommand {
+export abstract class HelpActions {
   private _errorService: ErrorService = new ErrorService();
 
   @Command('h actions')
   @Description(
     'Mostrar información sobre lo que puedo hacer. Muy útil este comando si no sabes cómo usar lo que puedo hacer.',
   )
-  async MamiChan(command: CommandMessage) {
+  async HelpActions(command: CommandMessage) {
     const embedMessage = new MessageEmbed();
     let descriptionHelp = '';
     descriptionHelp +=

@@ -4,19 +4,19 @@ import { MessageEmbed } from 'discord.js';
 import { EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class MamiChanCommand {
+export abstract class Help {
   private _errorService: ErrorService = new ErrorService();
 
   @Command('help')
   @Description(
     'Mostrar información sobre lo que puedo hacer. Muy útil este comando si no sabes cómo usar lo que puedo hacer.',
   )
-  async MamiChan(command: CommandMessage) {
+  async Help(command: CommandMessage) {
     const embedMessage = new MessageEmbed();
     let descriptionHelp = '';
-    descriptionHelp += '===========================\n';
-    descriptionHelp += 'Ayuda de comandos Generales\n';
-    descriptionHelp += '===========================\n';
+    descriptionHelp +=
+      'Estos son mis comandos, esta soy yo, por favor ten cuidado que puedes lastimarme si usas demasiado mis funciones. Te quiero. <3\n';
+    descriptionHelp += '\n';
 
     descriptionHelp += '🐱‍👤 **noa h actions**\n';
     descriptionHelp +=
@@ -36,7 +36,7 @@ export abstract class MamiChanCommand {
     descriptionHelp += '=> Muestra comandos un poco turbios bro.\n';
     descriptionHelp += '\n';
 
-    descriptionHelp += '🛑 **noa h prohibited**\n';
+    descriptionHelp += '🛑 **noa h warning**\n';
     descriptionHelp += '=> No uses estos comandos, por favor.\n';
     descriptionHelp += '\n';
 
