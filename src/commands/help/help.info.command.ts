@@ -1,7 +1,7 @@
 import { Command, Description, CommandMessage } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 
-import { EmbedColorsArray } from '../../utils/enums';
+import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
 export abstract class Help {
@@ -48,9 +48,7 @@ export abstract class Help {
     descriptionHelp += 'https://www.facebook.com/noachanvt\n';
     descriptionHelp += '\n';
 
-    embedMessage.setThumbnail(
-      'https://i.ibb.co/HGpm6Rh/118884326-101951864986516-1661613338635869054-n.jpg',
-    );
+    embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
     embedMessage.setTitle(
       `Hola ${command.author.username}, esto es lo que puedo hacer <3`,
     );
