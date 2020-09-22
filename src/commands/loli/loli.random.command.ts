@@ -11,7 +11,7 @@ export abstract class MamiChanCommand {
   @Command('loli')
   @Description('Te muestra una Loli que te quiere mucho.')
   async LoliLove(command: CommandMessage) {
-    const loliLove = (await this._tenorService.getRandom('Loli Love Anime'))
+    const loliLove = (await this._tenorService.getRandom('Loli Love Anime', 1))
       .body.results[0].media[0].gif.url;
     const embedMessage = new MessageEmbed();
     embedMessage.setTitle('Tenga a su Loli, cuidela, lo ama mucho <3');

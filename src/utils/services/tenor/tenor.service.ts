@@ -5,9 +5,9 @@ import '../../env/configuration';
 export class TenorService {
   private apiTenor = 'https://api.tenor.com/v1';
 
-  public async getRandom(name: string) {
+  public async getRandom(name: string, limit: number) {
     const httpClientOptions: IHttpClientOptions = {
-      uri: `${this.apiTenor}/random?q=${name}&key=${process.env.TENOR_KEY}&limit=1`,
+      uri: `${this.apiTenor}/random?q=${name}&key=${process.env.TENOR_KEY}&limit=${limit}`,
       method: 'GET',
       automaticallyParseJson: true,
     };

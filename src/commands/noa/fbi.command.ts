@@ -11,7 +11,7 @@ export abstract class FbiCommand {
   @Command('fbi')
   @Description('Hace que Noa diga algo que quieras.')
   async FbiCommand(command: CommandMessage) {
-    const fbiOpenUp = (await this._tenorService.getRandom('FBI Loli')).body
+    const fbiOpenUp = (await this._tenorService.getRandom('FBI Loli', 1)).body
       .results[0].media[0].gif.url;
     const embedMessage = new MessageEmbed();
     embedMessage.setTitle(

@@ -17,7 +17,7 @@ export abstract class BiteCommand {
   async Bite(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
     const embedMessage = new MessageEmbed();
-    const biteAnime = (await this._tenorService.getRandom('Anime Bite')).body
+    const biteAnime = (await this._tenorService.getRandom('Anime Bite', 1)).body
       .results[0].media[0].gif.url;
     embedMessage.setColor(
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],

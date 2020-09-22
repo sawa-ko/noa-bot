@@ -11,8 +11,9 @@ export abstract class HentaiCommand {
   @Command('hentai')
   @Description('Hace que Noa diga algo que quieras.')
   async Hentai(command: CommandMessage) {
-    const loliPolice = (await this._tenorService.getRandom('Anime Triggered'))
-      .body.results[0].media[0].gif.url;
+    const loliPolice = (
+      await this._tenorService.getRandom('Anime Triggered', 1)
+    ).body.results[0].media[0].gif.url;
     const embedMessage = new MessageEmbed();
     embedMessage.setTitle(`Vaya vaya, que tenemos aqui ( ⚆ _ ⚆ )`);
     embedMessage.setDescription(

@@ -14,8 +14,8 @@ export abstract class AngryCommand {
   )
   async Angry(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
-    const animeAngry = (await this._tenorService.getRandom('Anime Angry')).body
-      .results[0].media[0].gif.url;
+    const animeAngry = (await this._tenorService.getRandom('Anime Angry', 1))
+      .body.results[0].media[0].gif.url;
     const embedMessage = new MessageEmbed();
 
     if (userSelected) {

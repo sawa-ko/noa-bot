@@ -12,7 +12,7 @@ export abstract class BiteCommand {
   async AutoBan(command: CommandMessage) {
     const userSelected = command.mentions.users.first() || command.author;
     const embedMessage = new MessageEmbed();
-    const bakaAnime = (await this._tenorService.getRandom('Anime Sad')).body
+    const bakaAnime = (await this._tenorService.getRandom('Anime Sad', 1)).body
       .results[0].media[0].gif.url;
 
     if (userSelected.username == command.author.username) {

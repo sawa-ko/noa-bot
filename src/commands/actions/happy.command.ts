@@ -13,8 +13,8 @@ export abstract class HappyCommand {
   async Happy(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
     const embedMessage = new MessageEmbed();
-    const happyAnime = (await this._tenorService.getRandom('Anime Happy')).body
-      .results[0].media[0].gif.url;
+    const happyAnime = (await this._tenorService.getRandom('Anime Happy', 1))
+      .body.results[0].media[0].gif.url;
     embedMessage.setColor(
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
     );

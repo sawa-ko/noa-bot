@@ -17,7 +17,7 @@ export abstract class AngryCommand {
   async Baka(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
     const embedMessage = new MessageEmbed();
-    const bakaAnime = (await this._tenorService.getRandom('Anime Baka')).body
+    const bakaAnime = (await this._tenorService.getRandom('Anime Baka', 1)).body
       .results[0].media[0].gif.url;
     embedMessage.setColor(
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
