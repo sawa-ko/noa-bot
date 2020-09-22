@@ -35,6 +35,10 @@ export abstract class MamiChanCommand {
     descriptionHelp += '=> Besa a otro usuario y, ¡que vivan los novios!.\n';
     descriptionHelp += '\n';
 
+    descriptionHelp += '🤜 **noa happy [usuario - opcional]**\n';
+    descriptionHelp += '=> Ponte feliz con otro usuario o ponte feliz tu. ❤\n';
+    descriptionHelp += '\n';
+
     embedMessage.setThumbnail(
       'https://i.ibb.co/HGpm6Rh/118884326-101951864986516-1661613338635869054-n.jpg',
     );

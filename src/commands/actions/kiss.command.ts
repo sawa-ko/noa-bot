@@ -4,7 +4,7 @@ import { MessageEmbed } from 'discord.js';
 import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
 import { TenorService, ErrorService } from '../../utils/services';
 
-export abstract class AngryCommand {
+export abstract class KissCommand {
   private _tenorService: TenorService = new TenorService();
   private _errorService: ErrorService = new ErrorService();
 
