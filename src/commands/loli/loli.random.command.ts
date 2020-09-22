@@ -29,7 +29,7 @@ export abstract class MamiChanCommand {
     } catch (error) {
       command.channel.send(
         this._errorService.showError(
-          'No he podido enviarte una imagen sobre la hermosa que es Mami Chan, por favor vuelve a intentarlo. (⌣_⌣”)',
+          'No he podido enviarte la Loli que te ama mucho, por favor vuelve a intentarlo. (⌣_⌣”)',
         ),
       );
     }
