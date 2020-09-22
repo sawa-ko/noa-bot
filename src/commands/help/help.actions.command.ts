@@ -31,6 +31,10 @@ export abstract class MamiChanCommand {
       '=> Muerde a otro usuario, pero ten cuidado, activara tu modo raro.\n';
     descriptionHelp += '\n';
 
+    descriptionHelp += '🤜 **noa kiss [usuario - requerido]**\n';
+    descriptionHelp += '=> Besa a otro usuario y, ¡que vivan los novios!.\n';
+    descriptionHelp += '\n';
+
     embedMessage.setThumbnail(
       'https://i.ibb.co/HGpm6Rh/118884326-101951864986516-1661613338635869054-n.jpg',
     );
