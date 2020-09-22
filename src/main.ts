@@ -35,6 +35,13 @@ export class Main {
     log.info('=          ESTOS SON MIS COMANDOS         =');
     log.info('===========================================');
     if (Client.getCommands().length >= 1) {
+      log.info('===========================================');
+      log.info(
+        `=             TENGO EN TOTAL ${
+          Client.getCommands().length
+        }            =`,
+      );
+      log.info('===========================================');
       log.debug(Client.getCommands());
     } else {
       log.debug('=      Rayos, aun no tengo comandos       =');
