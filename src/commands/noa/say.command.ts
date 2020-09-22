@@ -2,7 +2,7 @@ import { Command, CommandMessage, Description } from '@typeit/discord';
 
 import { ErrorService } from '../../utils/services';
 
-export abstract class MamiChanCommand {
+export abstract class SayCommand {
   private _errorService: ErrorService = new ErrorService();
 
   @Command('say')

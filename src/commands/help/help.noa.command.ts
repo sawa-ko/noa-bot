@@ -19,6 +19,10 @@ export abstract class HelpNoa {
     descriptionHelp += '=> Dire algo que quieras por ti.\n';
     descriptionHelp += '\n';
 
+    descriptionHelp += '🤜 **noa fbi**\n';
+    descriptionHelp += '=> ¡Llámame al FBI Noa, por favor!\n';
+    descriptionHelp += '\n';
+
     embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
     embedMessage.setTitle('Comandos de Noa');
     embedMessage.setDescription(descriptionHelp);
