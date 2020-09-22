@@ -11,14 +11,17 @@ export abstract class MamiChanCommand {
   @Command('loli')
   @Description('Te muestra una Loli que te quiere mucho.')
   async LoliLove(command: CommandMessage) {
-    const loliLove = (await this._tenorService.getRandom('Loli Love Anime', 1))
-      .body.results[0].media[0].gif.url;
+    const loliLove = (await this._tenorService.getRandom('loli anime', 20)).body
+      .results;
+    const loliLoveSelected =
+      loliLove[Math.floor(Math.random() * loliLove.length)].media[0].gif.url;
+
     const embedMessage = new MessageEmbed();
     embedMessage.setTitle('Tenga a su Loli, cuidela, lo ama mucho <3');
     embedMessage.setDescription(
       'Si no la cuida le ira mal, tenga cuidado. ┌(▀Ĺ̯ ▀-͠ )┐',
     );
-    embedMessage.setImage(loliLove);
+    embedMessage.setImage(loliLoveSelected);
     embedMessage.setColor(
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
     );
