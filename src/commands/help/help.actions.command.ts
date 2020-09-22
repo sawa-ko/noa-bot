@@ -32,11 +32,15 @@ export abstract class MamiChanCommand {
     descriptionHelp += '\n';
 
     descriptionHelp += '🤜 **noa kiss [usuario - requerido]**\n';
-    descriptionHelp += '=> Besa a otro usuario y, ¡que vivan los novios!.\n';
+    descriptionHelp += '=> Besa a otro usuario y, ¡que vivan los novios!\n';
     descriptionHelp += '\n';
 
     descriptionHelp += '🤜 **noa happy [usuario - opcional]**\n';
     descriptionHelp += '=> Ponte feliz con otro usuario o ponte feliz tu. ❤\n';
+    descriptionHelp += '\n';
+
+    descriptionHelp += '🤜 **noa sad [usuario - opcional]**\n';
+    descriptionHelp += '=> El comando mas triste que tengo. UnU\n';
     descriptionHelp += '\n';
 
     embedMessage.setThumbnail(
