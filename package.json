@@ -18,6 +18,7 @@
   "dependencies": {
     "@typeit/discord": "^4.0.8",
     "class-validator": "^0.12.2",
+    "clear-any-console": "^1.16.2",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
     "http-client-retry": "^1.0.1",
