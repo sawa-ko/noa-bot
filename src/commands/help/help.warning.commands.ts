@@ -23,8 +23,12 @@ export abstract class HelpWarning {
     descriptionHelp += '=> Dile adios a tu amiguito.\n';
     descriptionHelp += '\n';
 
+    descriptionHelp += '🤜 **noa hentai**\n';
+    descriptionHelp += '=> Onni-Chan no seas puerco, por favor.\n';
+    descriptionHelp += '\n';
+
     embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
-    embedMessage.setTitle('Comandos Extras');
+    embedMessage.setTitle('Comandos peligrosos');
     embedMessage.setDescription(descriptionHelp);
     embedMessage.setFooter(
       'Si aun tienes problemas, contacta a mi creador @kaname#0001',
