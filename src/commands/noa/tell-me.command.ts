@@ -38,7 +38,7 @@ export abstract class TellMeCommand {
 
         const embedMessagePrivate = new MessageEmbed();
         embedMessagePrivate.setTitle(
-          `${animeQuote.anime} ~ ${animeQuote.character}`,
+          `${animeQuote.character} ~ ${animeQuote.anime}`,
         );
         embedMessagePrivate.setDescription(translation.text);
         embedMessagePrivate.setColor(
