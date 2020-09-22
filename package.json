@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@typeit/discord": "^4.0.8",
+    "@vitalets/google-translate-api": "^4.0.0",
     "class-validator": "^0.12.2",
     "clear-any-console": "^1.16.2",
     "discord.js": "^12.3.1",
