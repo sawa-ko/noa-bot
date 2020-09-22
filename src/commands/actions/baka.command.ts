@@ -19,6 +19,9 @@ export abstract class AngryCommand {
     const embedMessage = new MessageEmbed();
     const bakaAnime = (await this._tenorService.getRandom('Anime Baka')).body
       .results[0].media[0].gif.url;
+    embedMessage.setColor(
+      EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
+    );
 
     if (!userSelected) {
       return command.reply(
@@ -49,9 +52,6 @@ export abstract class AngryCommand {
       default:
         embedMessage.setTitle(
           `¡OMG! ${command.author.username} le ha dicho Baka a ${userSelected.username}`,
-        );
-        embedMessage.setColor(
-          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
         );
         embedMessage.setDescription(
           'Algo totalmente epico, creo que los baneare ahora jeje. (̂ ˃̥̥̥ ˑ̫ ˂̥̥̥ )̂',

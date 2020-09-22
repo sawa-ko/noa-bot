@@ -19,6 +19,9 @@ export abstract class BiteCommand {
     const embedMessage = new MessageEmbed();
     const biteAnime = (await this._tenorService.getRandom('Anime Bite')).body
       .results[0].media[0].gif.url;
+    embedMessage.setColor(
+      EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
+    );
 
     if (!userSelected) {
       return command.reply(
@@ -37,9 +40,6 @@ export abstract class BiteCommand {
         embedMessage.setDescription('Esto se va a poner feo...');
         embedMessage.setImage(biteAnime);
         embedMessage.setFooter('Me siento extraña, ¿Me convertire en Zombie?');
-        embedMessage.setColor(
-          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
-        );
 
         command.channel.send(embedMessage);
         break;
@@ -53,9 +53,6 @@ export abstract class BiteCommand {
       default:
         embedMessage.setTitle(
           `Cuidado todos, ${command.author.username} se ha puesto en modo raro y ha mordido a ${userSelected.username}`,
-        );
-        embedMessage.setColor(
-          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
         );
         embedMessage.setDescription(
           'Les recomiendo usar su filtro anti-raro para evitar ser mordidos. \n( ⚆ _ ⚆ )',

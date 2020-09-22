@@ -15,6 +15,9 @@ export abstract class AngryCommand {
     const embedMessage = new MessageEmbed();
     const bakaAnime = (await this._tenorService.getRandom('Anime Kiss')).body
       .results[0].media[0].gif.url;
+    embedMessage.setColor(
+      EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
+    );
 
     if (!userSelected) {
       return command.reply(
@@ -34,9 +37,6 @@ export abstract class AngryCommand {
           'https://media1.tenor.com/images/f72035e032125a5395883b8d68d9df5d/tenor.gif?itemid=16149781',
         );
         embedMessage.setFooter('Es-estoy apenada~~');
-        embedMessage.setColor(
-          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
-        );
 
         command.channel.send(embedMessage);
         break;
@@ -56,9 +56,6 @@ export abstract class AngryCommand {
         );
         embedMessage.setImage(bakaAnime);
         embedMessage.setFooter('¡Que vivan los novios!');
-        embedMessage.setColor(
-          EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
-        );
 
         command.channel.send(embedMessage);
         break;
