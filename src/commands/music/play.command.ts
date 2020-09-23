@@ -6,28 +6,27 @@ import {
   VoiceConnection,
 } from 'discord.js';
 import * as ytdl from 'ytdl-core';
+import * as ytsr from 'yt-search';
 
 import { EmbedColorsArray } from '../../utils/enums';
-import { ErrorService, MusicService } from '../../utils/services';
+import { ErrorService } from '../../utils/services';
 import { DatabaseService } from '../../utils/database';
 import { MusicGuildsI } from '../../utils/interface';
-import { dispatch } from 'rxjs/internal/observable/pairs';
 
 export abstract class PlayMusicCommand {
   private _errorService: ErrorService = new ErrorService();
-  private _musicService: MusicService = new MusicService();
   private _musicCollection: DatabaseService = new DatabaseService();
 
-  @Command('play add :youtube_url')
+  @Command('play add')
   @Description('Hace que Noa diga algo que quieras.')
   async PlayMusic(command: CommandMessage) {
-    const { youtube_url, type } = command.args;
+    const url_title = command.content.split(' ').splice(3).join(' ');
     const vcUser = command.member.voice.channel;
     const guildId = command.guild.id;
-
     const musicGuildDoc = this._musicCollection
       .getCollection('music')
       .by('guild_id', guildId);
+    let youtubeUrlConverted = await ytsr(url_title);
 
     if (!musicGuildDoc) {
       try {
@@ -67,27 +66,55 @@ export abstract class PlayMusicCommand {
       );
     }
 
-    if (!ytdl.validateURL(youtube_url)) {
-      return command.channel.send(
-        this._errorService.showError(
-          'Solo puedo reproducir videos de YouTube, lo siento. (｡•́︿•̀｡)',
-        ),
-      );
-    }
-
-    vcUser.join().then(async (connection) => {
-      await ytdl.getInfo(youtube_url).then((info) => {
-        this.addToPlaylist(
-          command,
-          loadingMessage,
-          connection,
-          embedMessage,
-          info,
-          vcUser,
-          musicGuildDoc,
+    if (ytdl.validateURL(url_title)) {
+      if (!ytdl.validateURL(url_title)) {
+        return command.channel.send(
+          this._errorService.showError(
+            'Solo puedo reproducir videos de YouTube, lo siento. (｡•́︿•̀｡)',
+          ),
         );
+      }
+
+      vcUser.join().then(async (connection) => {
+        await ytdl.getInfo(url_title).then((info) => {
+          this.addToPlaylist(
+            command,
+            loadingMessage,
+            connection,
+            embedMessage,
+            info,
+            vcUser,
+            musicGuildDoc,
+          );
+        });
       });
-    });
+    } else {
+      if (!ytdl.validateURL(youtubeUrlConverted.videos[0].url)) {
+        return command.channel.send(
+          this._errorService.showError(
+            'Solo puedo reproducir videos de YouTube, lo siento. (｡•́︿•̀｡)',
+          ),
+        );
+      }
+
+      vcUser.join().then(async (connection) => {
+        await ytdl
+          .getInfo(
+            youtubeUrlConverted.videos[Math.floor(Math.random() * 6)].url,
+          )
+          .then((info) => {
+            this.addToPlaylist(
+              command,
+              loadingMessage,
+              connection,
+              embedMessage,
+              info,
+              vcUser,
+              musicGuildDoc,
+            );
+          });
+      });
+    }
   }
 
   private async addToPlaylist(
@@ -149,6 +176,9 @@ export abstract class PlayMusicCommand {
     descriptionPlaylist +=
       'Puedes hacerlo con el comando *noa play add [video]* y se agregara a la playlist.';
     embedMessage.setDescription(descriptionPlaylist);
+    embedMessage.setThumbnail(
+      videoInfo.videoDetails.thumbnail.thumbnails[3].url,
+    );
 
     try {
       playlistGuildDoc.playlist.currentSong = videoInfo.videoDetails.title;

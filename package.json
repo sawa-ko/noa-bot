@@ -30,6 +30,7 @@
     "rxjs": "^6.6.3",
     "source-map-support": "^0.5.19",
     "tslog": "^2.8.0",
+    "yt-search": "^2.3.1",
     "ytdl-core": "^3.2.2"
   },
   "devDependencies": {
@@ -37,6 +38,7 @@
     "@types/lokijs": "^1.5.3",
     "@types/node": "^14.11.1",
     "@types/node-fetch": "^2.5.7",
+    "@types/yt-search": "^2.0.0",
     "@typescript-eslint/eslint-plugin": "^4.1.1",
     "@typescript-eslint/parser": "^4.1.1",
     "eslint": "^7.9.0",
