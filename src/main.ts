@@ -23,8 +23,12 @@ export class Main {
 
     try {
       this._client = new Client();
+      let token =
+        process.env.DEV_MODE == 'yes'
+          ? process.env.TOKEN_BOT_BETA
+          : process.env.TOKEN_BOT;
       await this._client.login(
-        process.env.TOKEN_BOT,
+        token,
         `${__dirname}/client.ts`,
         `${__dirname}/client.js`,
       );

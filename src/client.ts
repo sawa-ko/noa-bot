@@ -14,12 +14,17 @@ import { DatabaseService } from './utils/database';
 import { EmbedColorsEnum } from './utils/enums';
 import { ErrorService } from './utils/services';
 
-@Discord(Rule().startWith('noab').spaceOrEnd(), {
-  import: [
-    join(__dirname, 'commands/**', '*.ts'),
-    join(__dirname, 'commands/**', '*.js'),
-  ],
-})
+@Discord(
+  Rule()
+    .startWith(process.env.DEV_MODE == 'yes' ? 'noab' : 'noa')
+    .spaceOrEnd(),
+  {
+    import: [
+      join(__dirname, 'commands/**', '*.ts'),
+      join(__dirname, 'commands/**', '*.js'),
+    ],
+  },
+)
 export class DiscordApp {
   private _errorService: ErrorService = new ErrorService();
   private _databaseService: DatabaseService = new DatabaseService();
