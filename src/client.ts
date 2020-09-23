@@ -10,9 +10,10 @@ import {
 import { MessageEmbed } from 'discord.js';
 import { join } from 'path';
 import { EmbedColorsEnum } from './utils/enums';
+import { MusicI } from './utils/interface';
 import { ErrorService } from './utils/services';
 
-@Discord(Rule().startWith('noa').spaceOrEnd(), {
+@Discord(Rule().startWith('noa-b').spaceOrEnd(), {
   import: [
     join(__dirname, 'commands/**', '*.ts'),
     join(__dirname, 'commands/**', '*.js'),
