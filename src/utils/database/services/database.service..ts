@@ -6,6 +6,7 @@ export class DatabaseService {
     persistenceMethod: 'fs',
     autoload: true,
     autosave: true,
+    autosaveInterval: 2000,
   });
 
   public init() {
@@ -13,6 +14,8 @@ export class DatabaseService {
       indices: ['guild_id'],
       autoupdate: true,
     });
+
+    DatabaseService.noaDb.saveDatabase();
   }
 
   public getDb() {

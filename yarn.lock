@@ -108,6 +108,11 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
+"@romezzz/seconds-convert@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@romezzz/seconds-convert/-/seconds-convert-1.0.1.tgz#c4c3002e045e009ca83c3307aa1de88d825ed30e"
+  integrity sha512-eJ59Z/ukLfvXJbpi5wAT3FSAp5/VRDDSHqq+vJ768PKCxLvOGqMejcLrns/mWIaqQGh5PJKOCJVwZmYHsJKpPA==
+
 "@sindresorhus/is@^0.14.0":
   version "0.14.0"
   resolved "https://registry.yarnpkg.com/@sindresorhus/is/-/is-0.14.0.tgz#9fb3a3cf3132328151f353de4632e01e52102bea"
@@ -2081,6 +2086,11 @@ mkdirp@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-1.0.4.tgz#3eb5ed62622756d79a5f0e2a221dfebad75c2f7e"
   integrity sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==
+
+moment-duration-format@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/moment-duration-format/-/moment-duration-format-2.3.2.tgz#5fa2b19b941b8d277122ff3f87a12895ec0d6212"
+  integrity sha512-cBMXjSW+fjOb4tyaVHuaVE/A5TqkukDWiOfxxAjY+PEqmmBQlLwn+8OzwPiG3brouXKY5Un4pBjAeB6UToXHaQ==
 
 ms@2.0.0:
   version "2.0.0"

@@ -7,6 +7,7 @@ import {
 } from 'discord.js';
 import * as ytdl from 'ytdl-core';
 import * as ytsr from 'yt-search';
+import secondsConverter from '@romezzz/seconds-convert';
 
 import { EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
@@ -52,7 +53,6 @@ export abstract class PlayMusicCommand {
         );
       }
     }
-
     const embedMessage = new MessageEmbed();
     embedMessage.setColor(
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
@@ -61,6 +61,17 @@ export abstract class PlayMusicCommand {
     const loadingMessage = await command.reply(
       'Esperame, estoy cargando tu musica...',
     );
+
+    if (!musicGuildDoc) {
+      embedMessage.setDescription(
+        'Faltaba una configuracion, pero la he terminado, no te preocupes, ahora divirtamonos. Jeje.',
+      );
+
+      command.delete();
+      loadingMessage.delete();
+
+      return command.channel.send(embedMessage);
+    }
 
     if (!vcUser) {
       return command.channel.send(
@@ -132,6 +143,14 @@ export abstract class PlayMusicCommand {
   ) {
     let playlistGuildDoc: MusicGuildsI = musicGuildDoc;
     let descriptionPlaylist = '';
+    const timeVideo = `${
+      secondsConverter(parseInt(videoInfo.videoDetails.lengthSeconds)).hours
+    }:${
+      secondsConverter(parseInt(videoInfo.videoDetails.lengthSeconds)).minutes
+    }:${
+      secondsConverter(parseInt(videoInfo.videoDetails.lengthSeconds)).seconds
+    }`;
+
     await command.delete();
     await loadingMessage.delete();
 
@@ -139,9 +158,7 @@ export abstract class PlayMusicCommand {
       ...playlistGuildDoc.playlist.songs,
       {
         title: videoInfo.videoDetails.title,
-        length: `${
-          Number(videoInfo.videoDetails.lengthSeconds) / 60
-        } minutos\n`,
+        length: `${timeVideo}\n`,
         likes: videoInfo.videoDetails.likes,
         rate:
           Math.round(
@@ -168,9 +185,7 @@ export abstract class PlayMusicCommand {
     descriptionPlaylist += '\n';
 
     descriptionPlaylist += '**Duracion**\n';
-    descriptionPlaylist += `${
-      Number(videoInfo.videoDetails.lengthSeconds) / 60
-    } minutos\n`;
+    descriptionPlaylist += `${timeVideo}\n`;
     descriptionPlaylist += '\n';
 
     descriptionPlaylist += '**Pedido por**\n';
@@ -198,6 +213,7 @@ export abstract class PlayMusicCommand {
           filter: 'audioonly',
         });
 
+        console.log(playlistGuildDoc);
         connection.play(stream).on('finish', () => {
           this.playOnFinish(
             playlistGuildDoc,
@@ -205,6 +221,7 @@ export abstract class PlayMusicCommand {
             command,
             embedMessage,
             connection,
+            timeVideo,
           );
         });
       }
@@ -216,20 +233,23 @@ export abstract class PlayMusicCommand {
       );
     }
 
-    if (playlistGuildDoc.playing) {
+    if (
+      playlistGuildDoc.playing &&
+      playlistGuildDoc.playlist.songs.length > 1
+    ) {
       let descriptionPlaylist = '';
       descriptionPlaylist += '**Se agrego a la playlist**\n';
       descriptionPlaylist += `${videoInfo.videoDetails.title}\n`;
       descriptionPlaylist += '\n';
 
       descriptionPlaylist += '**Duracion**\n';
-      descriptionPlaylist += `${
-        Number(videoInfo.videoDetails.lengthSeconds) / 60
-      } minutos\n`;
+      descriptionPlaylist += `${timeVideo}\n`;
       descriptionPlaylist += '\n';
 
       descriptionPlaylist += '**Se reproducira despues de**\n';
-      descriptionPlaylist += `${playlistGuildDoc.playlist.songs.length} canciones\n`;
+      descriptionPlaylist += `${
+        playlistGuildDoc.playlist.songs.length - 1
+      } canciones\n`;
       descriptionPlaylist += '\n';
 
       descriptionPlaylist += '**Pedido por**\n';
@@ -252,6 +272,7 @@ export abstract class PlayMusicCommand {
     command: CommandMessage,
     embedMessage: MessageEmbed,
     connection: VoiceConnection,
+    timeVideo: string,
   ) {
     if (playlistGuildDoc.playlist.songs.length >= 1) {
       playlistGuildDoc.playlist.lastSongTitle =
@@ -278,9 +299,7 @@ export abstract class PlayMusicCommand {
     descriptionPlaylist += '\n';
 
     descriptionPlaylist += '**Duracion**\n';
-    descriptionPlaylist += `${
-      Number(playlistGuildDoc.playlist.songs[0].length) / 60
-    } minutos\n`;
+    descriptionPlaylist += `${timeVideo}\n`;
     descriptionPlaylist += '\n';
 
     if (playlistGuildDoc.playlist.songs.length >= 1) {
@@ -326,6 +345,7 @@ export abstract class PlayMusicCommand {
           command,
           embedMessage,
           connection,
+          timeVideo,
         );
       });
     } catch (error) {

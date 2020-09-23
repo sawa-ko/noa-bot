@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
+    "@romezzz/seconds-convert": "^1.0.1",
     "@typeit/discord": "^4.0.8",
     "@vitalets/google-translate-api": "^4.0.0",
     "class-validator": "^0.12.2",
@@ -26,6 +27,7 @@
     "ffmpeg-static": "^4.2.7",
     "http-client-retry": "^1.0.1",
     "lokijs": "^1.5.11",
+    "moment-duration-format": "^2.3.2",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.3",
     "source-map-support": "^0.5.19",
