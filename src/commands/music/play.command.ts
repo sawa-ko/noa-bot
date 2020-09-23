@@ -15,7 +15,7 @@ import { MusicGuildsI } from '../../utils/interface';
 
 export abstract class PlayMusicCommand {
   private _errorService: ErrorService = new ErrorService();
-  private _musicCollection: DatabaseService = new DatabaseService();
+  private _databaseService: DatabaseService = new DatabaseService();
 
   @Command('play add')
   @Description('Hace que Noa diga algo que quieras.')
@@ -23,9 +23,9 @@ export abstract class PlayMusicCommand {
     const url_title = command.content.split(' ').splice(3).join(' ');
     const vcUser = command.member.voice.channel;
     const guildId = command.guild.id;
-    const musicGuildDoc = this._musicCollection
+    const musicGuildDoc = this._databaseService
       .getCollection('music')
-      .by('guild_id', guildId);
+      .findOne({ guild_id: guildId });
     let youtubeUrlConverted = await ytsr(url_title);
 
     if (!musicGuildDoc) {
@@ -39,7 +39,11 @@ export abstract class PlayMusicCommand {
             songs: [],
           },
         };
-        await this._musicCollection.getCollection('music').insertOne(data);
+        const doc = await this._databaseService
+          .getCollection('music')
+          .insertOne(data);
+
+        await this._databaseService.getCollection('music').update(doc);
       } catch (error) {
         return command.channel.send(
           this._errorService.showError(
@@ -128,7 +132,8 @@ export abstract class PlayMusicCommand {
   ) {
     let playlistGuildDoc: MusicGuildsI = musicGuildDoc;
     let descriptionPlaylist = '';
-    playlistGuildDoc.playing = true;
+    await command.delete();
+    await loadingMessage.delete();
 
     playlistGuildDoc.playlist.songs = [
       ...playlistGuildDoc.playlist.songs,
@@ -182,13 +187,12 @@ export abstract class PlayMusicCommand {
 
     try {
       playlistGuildDoc.playlist.currentSong = videoInfo.videoDetails.title;
-      await this._musicCollection
+      playlistGuildDoc.playing = true;
+      await this._databaseService
         .getCollection('music')
         .update(playlistGuildDoc);
 
       if (playlistGuildDoc.playlist.songs.length == 1) {
-        await command.delete();
-        await loadingMessage.delete();
         await command.channel.send(embedMessage);
         const stream = ytdl(videoInfo.videoDetails.video_url, {
           filter: 'audioonly',
@@ -213,9 +217,6 @@ export abstract class PlayMusicCommand {
     }
 
     if (playlistGuildDoc.playing) {
-      await command.delete();
-      await loadingMessage.delete();
-
       let descriptionPlaylist = '';
       descriptionPlaylist += '**Se agrego a la playlist**\n';
       descriptionPlaylist += `${videoInfo.videoDetails.title}\n`;
@@ -309,7 +310,7 @@ export abstract class PlayMusicCommand {
     try {
       playlistGuildDoc.playlist.currentSong =
         playlistGuildDoc.playlist.songs[0].thumbnail;
-      await await this._musicCollection
+      await await this._databaseService
         .getCollection('music')
         .update(playlistGuildDoc);
       await command.channel.send(embedMessage);
