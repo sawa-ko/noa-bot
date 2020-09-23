@@ -5,10 +5,10 @@ import { ErrorService } from '../../utils/services';
 export abstract class SayCommand {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('say :content')
+  @Command('say')
   @Description('Hace que Noa diga algo que quieras.')
   async Say(command: CommandMessage) {
-    const { content } = command.args;
+    const content = command.content.split(' ').splice(2).join(' ');
 
     try {
       await command.delete();
