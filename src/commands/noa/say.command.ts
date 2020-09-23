@@ -5,17 +5,14 @@ import { ErrorService } from '../../utils/services';
 export abstract class SayCommand {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('say')
+  @Command('say :content')
   @Description('Hace que Noa diga algo que quieras.')
   async Say(command: CommandMessage) {
-    const args = command.content
-      .slice('noa'.length + 'say'.length + 1)
-      .trim()
-      .toString();
+    const { content } = command.args;
 
     try {
       await command.delete();
-      await command.channel.send(args);
+      await command.channel.send(content);
     } catch (error) {
       command.channel.send(
         this._errorService.showError(

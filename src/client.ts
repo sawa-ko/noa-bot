@@ -5,13 +5,14 @@ import {
   On,
   ArgsOf,
   Client,
+  Rule,
 } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 import { join } from 'path';
 import { EmbedColorsEnum } from './utils/enums';
 import { ErrorService } from './utils/services';
 
-@Discord('noa ', {
+@Discord(Rule().startWith('noa').spaceOrEnd(), {
   import: [
     join(__dirname, 'commands/**', '*.ts'),
     join(__dirname, 'commands/**', '*.js'),
