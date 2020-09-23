@@ -213,7 +213,6 @@ export abstract class PlayMusicCommand {
           filter: 'audioonly',
         });
 
-        console.log(playlistGuildDoc);
         connection.play(stream).on('finish', () => {
           this.playOnFinish(
             playlistGuildDoc,
