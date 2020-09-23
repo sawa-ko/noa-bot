@@ -58,6 +58,9 @@ export abstract class PlayMusicCommand {
       EmbedColorsArray[Math.floor(Math.random() * EmbedColorsArray.length)],
     );
     embedMessage.setTitle('Reproductor de musica');
+    embedMessage.setFooter(
+      'Usa **noa h music** para obtener ayuda sobre mis comandosd de musica.',
+    );
     const loadingMessage = await command.reply(
       'Esperame, estoy cargando tu musica...',
     );
@@ -203,9 +206,6 @@ export abstract class PlayMusicCommand {
     try {
       playlistGuildDoc.playlist.currentSong = videoInfo.videoDetails.title;
       playlistGuildDoc.playing = true;
-      await this._databaseService
-        .getCollection('music')
-        .update(playlistGuildDoc);
 
       if (playlistGuildDoc.playlist.songs.length == 1) {
         await command.channel.send(embedMessage);
@@ -224,44 +224,48 @@ export abstract class PlayMusicCommand {
           );
         });
       }
+
+      if (
+        playlistGuildDoc.playing &&
+        playlistGuildDoc.playlist.songs.length > 1
+      ) {
+        let descriptionPlaylist = '';
+        descriptionPlaylist += '**Se agrego a la playlist**\n';
+        descriptionPlaylist += `${videoInfo.videoDetails.title}\n`;
+        descriptionPlaylist += '\n';
+
+        descriptionPlaylist += '**Duracion**\n';
+        descriptionPlaylist += `${timeVideo}\n`;
+        descriptionPlaylist += '\n';
+
+        descriptionPlaylist += '**Se reproducira despues de**\n';
+        descriptionPlaylist += `${
+          playlistGuildDoc.playlist.songs.length - 1
+        } canciones\n`;
+        descriptionPlaylist += '\n';
+
+        descriptionPlaylist += '**Pedido por**\n';
+        descriptionPlaylist += `${command.author.username}\n`;
+        descriptionPlaylist += '\n';
+
+        embedMessage.setDescription(descriptionPlaylist);
+        embedMessage.setThumbnail(
+          videoInfo.videoDetails.thumbnail.thumbnails[3].url,
+        );
+
+        embedMessage.setDescription(descriptionPlaylist);
+        command.channel.send(embedMessage);
+      }
+
+      await this._databaseService
+        .getCollection('music')
+        .update(playlistGuildDoc);
     } catch (error) {
       command.channel.send(
         this._errorService.showError(
           'Oh no, no he podido reproducir la musica que has querido, perdoname... (｡•́︿•̀｡)',
         ),
       );
-    }
-
-    if (
-      playlistGuildDoc.playing &&
-      playlistGuildDoc.playlist.songs.length > 1
-    ) {
-      let descriptionPlaylist = '';
-      descriptionPlaylist += '**Se agrego a la playlist**\n';
-      descriptionPlaylist += `${videoInfo.videoDetails.title}\n`;
-      descriptionPlaylist += '\n';
-
-      descriptionPlaylist += '**Duracion**\n';
-      descriptionPlaylist += `${timeVideo}\n`;
-      descriptionPlaylist += '\n';
-
-      descriptionPlaylist += '**Se reproducira despues de**\n';
-      descriptionPlaylist += `${
-        playlistGuildDoc.playlist.songs.length - 1
-      } canciones\n`;
-      descriptionPlaylist += '\n';
-
-      descriptionPlaylist += '**Pedido por**\n';
-      descriptionPlaylist += `${command.author.username}\n`;
-      descriptionPlaylist += '\n';
-
-      embedMessage.setDescription(descriptionPlaylist);
-      embedMessage.setThumbnail(
-        videoInfo.videoDetails.thumbnail.thumbnails[3].url,
-      );
-
-      embedMessage.setDescription(descriptionPlaylist);
-      command.channel.send(embedMessage);
     }
   }
 
@@ -280,6 +284,10 @@ export abstract class PlayMusicCommand {
 
     if (playlistGuildDoc.playlist.songs.length == 0) {
       playlistGuildDoc.playing = false;
+      playlistGuildDoc.playlist.songs.slice(
+        0,
+        playlistGuildDoc.playlist.songs.length - 1,
+      );
       return vcUser.leave();
     }
 
@@ -287,7 +295,6 @@ export abstract class PlayMusicCommand {
       return vcUser.leave();
     }
 
-    playlistGuildDoc.playlist.songs.shift();
     let descriptionPlaylist = '';
     descriptionPlaylist += '**Reproduciendo ahora**\n';
     descriptionPlaylist += `${playlistGuildDoc.playlist.songs[0].title}\n`;
@@ -301,16 +308,16 @@ export abstract class PlayMusicCommand {
     descriptionPlaylist += `${timeVideo}\n`;
     descriptionPlaylist += '\n';
 
-    if (playlistGuildDoc.playlist.songs.length >= 1) {
+    if (playlistGuildDoc.playlist.songs.length != 0) {
       descriptionPlaylist += '**Siguiente cancion**\n';
       descriptionPlaylist += `${playlistGuildDoc.playlist.songs[1].title}\n`;
       descriptionPlaylist += '\n';
 
       descriptionPlaylist += '**Pedido por**\n';
       descriptionPlaylist += `${playlistGuildDoc.playlist.songs[1].request_by}`;
+      descriptionPlaylist += '\n';
 
-      embedMessage.setDescription(descriptionPlaylist);
-      embedMessage.setThumbnail(playlistGuildDoc.playlist.songs[1].thumbnail);
+      embedMessage.setThumbnail(playlistGuildDoc.playlist.songs[0].thumbnail);
     }
 
     descriptionPlaylist += '**Siguiente cancion**\n';
@@ -321,13 +328,12 @@ export abstract class PlayMusicCommand {
       '**¿Quieres seguir escuchando mas canciones conmigo?**\n';
     descriptionPlaylist +=
       'Puedes hacerlo con el comando *noa play add [video]* pequeño Onni-Chan y se agregara a la playlist.';
-
+    descriptionPlaylist += '\n';
     embedMessage.setDescription(descriptionPlaylist);
-    embedMessage.setThumbnail(playlistGuildDoc.playlist.songs[1].thumbnail);
 
     try {
       playlistGuildDoc.playlist.currentSong =
-        playlistGuildDoc.playlist.songs[0].thumbnail;
+        playlistGuildDoc.playlist.songs[0].title;
       await await this._databaseService
         .getCollection('music')
         .update(playlistGuildDoc);

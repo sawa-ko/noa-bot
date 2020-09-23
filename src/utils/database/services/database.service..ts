@@ -10,10 +10,13 @@ export class DatabaseService {
   });
 
   public init() {
-    DatabaseService.noaDb.addCollection('music', {
-      indices: ['guild_id'],
-      autoupdate: true,
-    });
+    DatabaseService.noaDb.removeCollection('music');
+    setTimeout(() => {
+      DatabaseService.noaDb.addCollection('music', {
+        indices: ['guild_id'],
+        autoupdate: true,
+      });
+    }, 2000);
 
     DatabaseService.noaDb.saveDatabase();
   }
