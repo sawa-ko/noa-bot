@@ -8,22 +8,21 @@ import {
 } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class BanCommand {
+export abstract class KickCommand {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('m ban :user :days')
+  @Command('m kick :user')
   @Infos({ forAdmins: true })
-  @Description('Comando para banear usuarios.')
-  async Ban(command: CommandMessage) {
+  @Description('Comando para expulsar usuarios.')
+  async Kick(command: CommandMessage) {
     const userSelected = command.mentions.users.first();
-    const { days } = command.args;
-    const reason = command.content.split(' ').splice(5).join(' ');
+    const reason = command.content.split(' ').splice(4).join(' ');
 
     const embedMessage = new MessageEmbed();
     embedMessage.setTitle(
-      `El usuario ${userSelected.username} ha sido baneado por ${command.author.username}`,
+      `El usuario ${userSelected.username} ha sido expulsado por ${command.author.username}`,
     );
-    embedMessage.setDescription(`Razon: ${reason} \nDias: ${days}`);
+    embedMessage.setDescription(`Razon: ${reason}`);
     embedMessage.setFooter(
       'Comando solo disponible para moderadores / administradores.',
     );
@@ -45,23 +44,7 @@ export abstract class BanCommand {
     if (!userSelected) {
       return await command.channel.send(
         this._errorService.showError(
-          'Querido administrador / moderador, si vas a usar este comando que sea para banear a un mal usuario, no para hacer nada. ( ͡° ͜ʖ ͡°)',
-        ),
-      );
-    }
-
-    if (!days) {
-      return await command.channel.send(
-        this._errorService.showError(
-          'Necesito saber cuantos dias quieres que dure el baneo, po-por favor administrador...',
-        ),
-      );
-    }
-
-    if (isNaN(days)) {
-      return await command.channel.send(
-        this._errorService.showError(
-          'Los dias tienen que ser en numero no en texto, po-por favor administrador...',
+          'Querido administrador / moderador, si vas a usar este comando que sea para expulsar a un mal usuario, no para hacer nada. ( ͡° ͜ʖ ͡°)',
         ),
       );
     }
@@ -69,15 +52,15 @@ export abstract class BanCommand {
     if (!reason) {
       return await command.channel.send(
         this._errorService.showError(
-          'Necesito saber la razon del baneo, po-por favor administrador...',
+          'Necesito saber la razon de la expulsion, po-por favor administrador...',
         ),
       );
     }
 
-    if (!command.member.hasPermission('BAN_MEMBERS')) {
+    if (!command.member.hasPermission('KICK_MEMBERS')) {
       return await command.channel.send(
         this._errorService.showError(
-          'Lo siento, pero me hace falta el siguiente permiso: \n**Permisos:** \n- BAN_MEMBERS',
+          'Lo siento, pero me hace falta el siguiente permiso. \n**Permisos:** \n- KICK_MEMBERS',
         ),
       );
     }
@@ -85,7 +68,7 @@ export abstract class BanCommand {
     if (userSelected.username == command.author.username) {
       return await command.channel.send(
         this._errorService.showError(
-          'No-no puedes banearte a ti mismo, si lo haces, ¿Quien me va a cuidar? (︶︹︺)',
+          'No-no puedes expulsarte a ti mismo, si lo haces, ¿Quien me va a cuidar? (︶︹︺)',
         ),
       );
     }
@@ -100,13 +83,13 @@ export abstract class BanCommand {
 
     try {
       const user = command.guild.member(userSelected);
-      await user.ban({ reason, days });
+      await user.kick(reason);
       await command.delete();
       await command.channel.send(embedMessage);
     } catch (error) {
       return await command.channel.send(
         this._errorService.showError(
-          'Me ha ganado esta batalla de poder y no he podido banear a este usuario, perdoname... (▰︶︹︺▰)',
+          'Me ha ganado esta batalla de poder y no he podido expulsar a este usuario, perdoname... (▰︶︹︺▰)',
         ),
       );
     }

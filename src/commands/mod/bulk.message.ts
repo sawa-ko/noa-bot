@@ -10,13 +10,13 @@ import { MessageEmbed } from 'discord.js';
 import { EmbedColorsArray, RolesModEnum } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class BanCommand {
+export abstract class BulkCommand {
   private _errorService: ErrorService = new ErrorService();
 
   @Command('m bulk :total')
   @Infos({ forAdmins: true })
   @Description('Comando para banear usuarios.')
-  async Ban(command: CommandMessage) {
+  async Buk(command: CommandMessage) {
     const { total } = command.args;
     const embedMessage = new MessageEmbed();
     embedMessage.setColor(

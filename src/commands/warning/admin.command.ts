@@ -55,7 +55,7 @@ export abstract class BiteCommand {
         try {
           command.member.setNickname(defaultNickNameUser);
           await command.reply(
-            'Ha verdad, que tu no eres el admin aqui jeje. ( ͡° ͜ʖ ͡°)',
+            'ha verdad, que tu no eres el admin aqui jeje. ( ͡° ͜ʖ ͡°)',
           );
         } catch (error) {
           command.channel.send(
@@ -67,10 +67,10 @@ export abstract class BiteCommand {
       }, 10000);
     } else {
       embedMessage.setTitle(
-        `Sugoiiii, ${command.author.username} se ha autoplocamado el nuevo Admin`,
+        `Sugoiiii, ${command.author.username} ha autoplocamado el nuevo Admin que sera ${userSelected.username}`,
       );
       embedMessage.setDescription(
-        `${command.author.username} tiene hasta mas poder que yo, ahora tengo miedo... ヽ(ﾟДﾟ)ﾉ`,
+        `${userSelected} tiene hasta mas poder que yo, ahora tengo miedo... ヽ(ﾟДﾟ)ﾉ`,
       );
       embedMessage.setFooter(`¡Larga vida a ${command.author.username}!`);
       embedMessage.setImage(adminAnime);
@@ -90,7 +90,7 @@ export abstract class BiteCommand {
         try {
           command.member.setNickname(defaultNickNameUser);
           await command.reply(
-            'Ha verdad, que tu no eres el admin aqui jeje. ( ͡° ͜ʖ ͡°)',
+            'ha verdad, que tu no eres el admin aqui jeje. ( ͡° ͜ʖ ͡°)',
           );
         } catch (error) {
           command.channel.send(
