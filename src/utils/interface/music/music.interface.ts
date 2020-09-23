@@ -1,9 +1,13 @@
-export interface PlaylistGuilds {
-  id: string;
-  playlist: playlist;
+import { CommandMessage } from '@typeit/discord';
+import { VoiceChannel, VoiceConnection } from 'discord.js';
+
+export interface MusicGuildsI {
+  guild_id: string;
+  playlist: PlaylistI;
+  playing: boolean;
 }
 
-export interface Songs {
+export interface SongsI {
   title: string;
   length: string;
   likes: number;
@@ -14,9 +18,8 @@ export interface Songs {
   thumbnail: string;
 }
 
-interface playlist {
+interface PlaylistI {
   lastSongTitle: string;
   currentSong: string;
-  playing: boolean;
-  songs: Songs[];
+  songs: SongsI[];
 }

@@ -9,11 +9,12 @@ import {
 } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 import { join } from 'path';
+
+import { DatabaseService } from './utils/database';
 import { EmbedColorsEnum } from './utils/enums';
-import { MusicI } from './utils/interface';
 import { ErrorService } from './utils/services';
 
-@Discord(Rule().startWith('noa-b').spaceOrEnd(), {
+@Discord(Rule().startWith('noab').spaceOrEnd(), {
   import: [
     join(__dirname, 'commands/**', '*.ts'),
     join(__dirname, 'commands/**', '*.js'),
@@ -21,6 +22,7 @@ import { ErrorService } from './utils/services';
 })
 export class DiscordApp {
   private _errorService: ErrorService = new ErrorService();
+  private _databaseService: DatabaseService = new DatabaseService();
 
   @On('message')
   onMessage([message]: ArgsOf<'message'>, client: Client) {
@@ -28,7 +30,9 @@ export class DiscordApp {
   }
 
   @On('ready')
-  async onReady(args, bot) {
+  async onReady(_, bot) {
+    this._databaseService.init();
+
     bot.user.setActivity(
       'noa help | Con este comando puedes ver lo que puedo hacer (￣▽￣)ノ',
     );

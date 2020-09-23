@@ -7,7 +7,6 @@ import './utils/env/configuration';
 
 export class Main {
   private static _client: Client;
-  public static _nameBot = 'NoaBot';
 
   static get Client(): Client {
     return this._client;
