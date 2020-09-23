@@ -16,17 +16,20 @@
     "lint": "tsc --noEmit && eslint './src/*.{js,ts}' --quiet --fix"
   },
   "dependencies": {
+    "@discordjs/opus": "^0.3.2",
     "@typeit/discord": "^4.0.8",
     "@vitalets/google-translate-api": "^4.0.0",
     "class-validator": "^0.12.2",
     "clear-any-console": "^1.16.2",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
+    "ffmpeg-static": "^4.2.7",
     "http-client-retry": "^1.0.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.3",
     "source-map-support": "^0.5.19",
-    "tslog": "^2.8.0"
+    "tslog": "^2.8.0",
+    "ytdl-core": "^3.2.2"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",

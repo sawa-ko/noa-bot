@@ -31,14 +31,6 @@ export abstract class BiteCommand {
       embedMessage.setFooter(`¡Larga vida a ${command.author.username}!`);
       embedMessage.setImage(adminAnime);
 
-      if (!command.member.hasPermission('CHANGE_NICKNAME')) {
-        return command.channel.send(
-          this._errorService.showError(
-            'Oh no, no he podido ejecutar este comando porque no tengo los permisos suficientes, necesito el siguiente permiso. \nPERMISO:\n **CHANGE_NICKNAME**',
-          ),
-        );
-      }
-
       command.member.setNickname(`[ADMIN] ${command.author.username}`);
 
       try {
