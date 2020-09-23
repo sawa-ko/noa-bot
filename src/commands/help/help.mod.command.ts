@@ -4,31 +4,37 @@ import { MessageEmbed } from 'discord.js';
 import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
-export abstract class HelpNoa {
+export abstract class HelpMod {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('h noa')
-  @Description('Muestra la lista de comandos que noa puede hacer por ti.')
-  async HelpNoa(command: CommandMessage) {
+  @Command('h mod')
+  @Description(
+    'Muestra los comandos permitidos solo para Mods y Administradores.',
+  )
+  async HelpMod(command: CommandMessage) {
     const embedMessage = new MessageEmbed();
     let descriptionHelp = '';
-    descriptionHelp += 'Bien, esto puedo hacer por ti.\n';
+    descriptionHelp +=
+      'Llego la hora de poner orden aqui, ten estos comandos.\n';
     descriptionHelp += '\n';
 
-    descriptionHelp += '🤜 **noa say [mensaje - obligatorio]**\n';
-    descriptionHelp += '=> Dire algo que quieras por ti.\n';
+    descriptionHelp +=
+      '🤜 **noa m ban [usuario - obligatorio] [dias - obligatorio] [razon - opcional]**\n';
+    descriptionHelp += '=> Banea a un usuario por los dias que especifiques.\n';
     descriptionHelp += '\n';
 
-    descriptionHelp += '🤜 **noa fbi**\n';
-    descriptionHelp += '=> ¡Llámame al FBI Noa, por favor!\n';
+    descriptionHelp += '🤜 **noa m kick [usuario - obligatorio]**\n';
+    descriptionHelp += '=> Expulsa a un miembro del servidor.\n';
     descriptionHelp += '\n';
 
-    descriptionHelp += '🤜 **noa tellme**\n';
-    descriptionHelp += '=> Te dire algo importante.\n';
+    descriptionHelp +=
+      '🤜 **noa m bulk [numero de mensajes - obligatorio - max 100]**\n';
+    descriptionHelp +=
+      '=> Eliminar la cantidad de mensajes que especifiques. Tomando en cuenta que no se pueden borrar mas de 100 mensajes a la vez.\n';
     descriptionHelp += '\n';
 
     embedMessage.setThumbnail(ConfigurationBotEnum.PHOTO_BOT);
-    embedMessage.setTitle('Comandos de Noa');
+    embedMessage.setTitle('Comandos de moderación');
     embedMessage.setDescription(descriptionHelp);
     embedMessage.setFooter(
       'Si aun tienes problemas, contacta a mi creador @kaname#0001',

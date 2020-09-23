@@ -11,7 +11,7 @@ import { ErrorService } from '../../utils/services';
 export abstract class KickCommand {
   private _errorService: ErrorService = new ErrorService();
 
-  @Command('m kick :user')
+  @Command('m kick')
   @Infos({ forAdmins: true })
   @Description('Comando para expulsar usuarios.')
   async Kick(command: CommandMessage) {

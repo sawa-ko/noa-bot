@@ -100,7 +100,13 @@ export abstract class BanCommand {
 
     try {
       const user = command.guild.member(userSelected);
-      await user.ban({ reason, days });
+
+      if (reason) {
+        await user.ban({ reason, days });
+      } else {
+        await user.ban({ days });
+      }
+
       await command.delete();
       await command.channel.send(embedMessage);
     } catch (error) {

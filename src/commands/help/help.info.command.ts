@@ -1,7 +1,11 @@
 import { Command, Description, CommandMessage } from '@typeit/discord';
 import { MessageEmbed } from 'discord.js';
 
-import { ConfigurationBotEnum, EmbedColorsArray } from '../../utils/enums';
+import {
+  ConfigurationBotEnum,
+  EmbedColorsArray,
+  RolesModEnum,
+} from '../../utils/enums';
 import { ErrorService } from '../../utils/services';
 
 export abstract class Help {
@@ -38,6 +42,10 @@ export abstract class Help {
 
     descriptionHelp += '🛑 **noa h warning**\n';
     descriptionHelp += '=> No uses estos comandos, por favor.\n';
+    descriptionHelp += '\n';
+
+    descriptionHelp += '☢ **noa h mod**\n';
+    descriptionHelp += '=> Comandos para la moderacion del servidor.\n';
     descriptionHelp += '\n';
 
     descriptionHelp += '💖 **noa h social**\n';
